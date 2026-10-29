@@ -55,19 +55,20 @@ sh vpn-dns-guard/install.sh --offline-archive /путь/AdGuardHome_linux_amd64.
 
 Проверка SHA256 всё равно обязательна. Опции отключения проверки нет.
 
-## Установка из будущего GitHub-релиза
+## Установка из GitHub-релиза
 
-GitHub-репозиторий и релиз **не создаются этим пакетом**. После публикации
-репозитория загрузите оттуда `bootstrap.sh`, проверьте источник и выполните:
+На новом подходящем сервере, в консоли владельца с административными правами:
 
 ```sh
-sh bootstrap.sh OWNER/REPOSITORY v0.1.0
+curl -fsSLo bootstrap.sh https://raw.githubusercontent.com/Dron2837/vpn-dns-guard/v0.1.0/bootstrap.sh
+sh bootstrap.sh Dron2837/vpn-dns-guard v0.1.0
 ```
 
-`OWNER/REPOSITORY` — реальный выбранный репозиторий, не готовая ссылка. Bootstrap
-скачивает версионный архив и его SHA256, проверяет имена/типы файлов, затем
-запускает установщик. Нельзя указывать `latest`; публичная публикация не требуется
-для работы из локального архива. Private GitHub Release требует отдельного
+Исходники: <https://github.com/Dron2837/vpn-dns-guard>.
+Версионный пакет: <https://github.com/Dron2837/vpn-dns-guard/releases/tag/v0.1.0>.
+Bootstrap скачивает архив и его SHA256, проверяет имена/типы файлов, затем
+запускает установщик. Нельзя указывать `latest`. Для собственного форка замените
+в командах владельца и репозиторий. Private GitHub Release требует отдельного
 способа доставки: встроенного хранения токенов в bootstrap нет.
 
 ## Встроенные списки
