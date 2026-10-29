@@ -5,5 +5,6 @@
   black/white lists, checksummed AdGuard archives and explicit uninstall.
 - Only strict DNS mode is supported; no automatic public-DNS fallback.
 - Existing unmanaged/legacy AdGuard installations are refused, not migrated.
-- Built-in snapshot: 67 selected-service rules, 9 bank rules, 1 Gosuslugi rule.
+- Built-in lists restrict access to selected major Russian online services,
+  banks, and the Gosuslugi/ESIA platform.
 - GitHub publication is optional; local versioned archives work independently.
