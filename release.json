@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "state_schema": 1,
+  "adguard_version": "v0.107.79",
+  "archives": {
+    "amd64": "c48f4a43000665484c5ec28177de11a004759b620dae8f77b2aabefc9ef3687f",
+    "arm64": "3f7893c18e8aaadc456d0452839190561c306ca95175a2254958be80a769c1ae"
+  }
+}

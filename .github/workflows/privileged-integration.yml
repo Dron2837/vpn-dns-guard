@@ -1,0 +1,20 @@
+name: Disposable VM privileged integration (manual only)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Prepare only this disposable runner
+        run: |
+          sudo apt-get update
+          sudo env NEEDRESTART_MODE=l apt-get install -y nftables iproute2 iptables
+      - run: python3 build_release.py
+      - name: Real kernel, Docker, systemd and DNS checks
+        env:
+          VDNS_ALLOW_PRIVILEGED_TESTS: '1'
+        run: sudo --preserve-env=GITHUB_ACTIONS,VDNS_ALLOW_PRIVILEGED_TESTS bash tests/privileged_integration.sh

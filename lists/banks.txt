@@ -1,0 +1,10 @@
+! Sber, VTB, Alfa-Bank, T-Bank: roots and their subdomains.
+||sberbank.ru^
+||sber.ru^
+||sbrf.ru^
+||sberbank.com^
+||vtb.ru^
+||vtb24.ru^
+||alfabank.ru^
+||tbank.ru^
+||tinkoff.ru^

@@ -1,0 +1,8 @@
+VPN DNS Guard contains installation/control code and user-selected domain rules.
+AdGuard Home is NOT included in the source/release archive. The installer downloads
+an official, version-pinned AdGuard Home release and verifies its SHA256.
+AdGuard Home is a separate project licensed under GPL-3.0; see its release and
+license at https://github.com/AdguardTeam/AdGuardHome .
+Selected services-list rules were taken from AdGuardTeam/HostlistsRegistry;
+that upstream repository is GPL-3.0. This package is distributed under GPL-3.0.
+No endorsement, threat attribution or guarantee of VPN anonymity is implied.
