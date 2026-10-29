@@ -1,5 +1,9 @@
 #!/bin/sh
 set -eu
+# Docker restart preserves the fixture filesystem, including /run/netns mounts.
+# Recreate only this disposable test namespace and its veth pair.
+ip netns del client 2>/dev/null || true
+ip link del "$VDNS_INTERFACE" 2>/dev/null || true
 ip netns add client
 ip link add "$VDNS_INTERFACE" type veth peer name client0
 ip address add "$VDNS_GATEWAY/24" dev "$VDNS_INTERFACE"

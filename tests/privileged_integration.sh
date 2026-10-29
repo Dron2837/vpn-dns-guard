@@ -10,6 +10,16 @@ VDNS_IMAGE=amnezia-vdns-fixture:integration
 VDNS_AWG=vdns-fixture-awg
 VDNS_WG=vdns-fixture-wg
 cleanup() {
+  result=$?
+  if [[ $result -ne 0 ]]; then
+    echo "Integration failed (exit $result); collecting test-only diagnostics."
+    for container in "$VDNS_AWG" "$VDNS_WG"; do
+      docker logs "$container" 2>&1 || true
+      docker exec "$container" ip -4 address 2>&1 || true
+      docker exec "$container" iptables -t nat -S 2>&1 || true
+    done
+    journalctl --no-pager -n 60 -u vpn-dns-guard.service -u vpn-dns-guard-adguard.service || true
+  fi
   if command -v vpn-dns-guard >/dev/null; then vpn-dns-guard uninstall --restore-dns || true; fi
   docker rm -f "$VDNS_AWG" "$VDNS_WG" >/dev/null 2>&1 || true
   docker network rm "$VDNS_NET" >/dev/null 2>&1 || true
