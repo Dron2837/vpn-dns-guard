@@ -39,7 +39,11 @@ done
 sh ./install.sh --network "$VDNS_NET"
 vpn-dns-guard doctor
 dns() {
-  docker exec "$1" ip netns exec client dig +time=2 +tries=1 +short @1.1.1.1 "$2" "${3:-A}" "${4:-+notcp}"
+  local output
+  output=$(docker exec "$1" ip netns exec client dig +time=2 +tries=1 +short @1.1.1.1 "$2" "${3:-A}" "${4:-+notcp}") || return $?
+  # dig prints timeout diagnostics to stdout even with +short.  They are not
+  # successful DNS answers and must not be mistaken for a public-DNS leak.
+  printf '%s\n' "$output" | grep -E '^([0-9]{1,3}\.){3}[0-9]{1,3}$|^[0-9a-fA-F:]*:[0-9a-fA-F:]*$'
 }
 for container in "$VDNS_AWG" "$VDNS_WG"; do
   [[ $(dns "$container" max.ru) == 0.0.0.0 ]]
